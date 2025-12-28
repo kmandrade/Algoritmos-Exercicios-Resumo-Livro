@@ -4,19 +4,50 @@ public static class Program
 {
     public static void Main(string[] args)
     {
-        
+        BuscaBinaria();
+
     }
 
+    #region Array e Lista encadeada
+
+    /*
+        no array sabemos exatamente cada posicacao de cada item , porem possuimos limite de posicoes.
+        
+        na lista encadeada não sabemos, posicionamos aleatoriamente os itens no vetor nos espaços livres na memoria,
+        mas para acessar o 10° item por ex precisamos percer todos os itens que possuem o endereco do proximo item, pois
+        o endereco do item posterior vai estar armazenado no anterior.
+
+        ou seja para leitura o array é melhor O(1) mas para escrita é O(n) pois precisa escrever de 1 a 1, mas para ler ja sabemos a posicacao exata
+        mas na lista encadeada a leitura é O(n) pois nao sabemos a posicacao entao precisamos ler de 1 a 1 ja na escrita é O(1) pois podemos inserir em qualquer posicacao
+    */
+
+    #endregion
+
     #region BuscaBinaria
+    // Big O(log n) medimos o quanto o algoritmo é rapido enquanto a lista aumenta (crescimento do numero de operacoes) não o tempo de execucao em si.
+    // não medimos o tempo em s mas sim o tempo de execucao em si
+    // Big O(n!) - fatorial de operacoes, ex Anagrama de uma lista: “ABC” → 3! = 6 anagramas: ABC, ACB, BAC, BCA, CAB, CBA
+    /*
+     Exemplo de for com complexidade log de n:
+
+        for (i = 0; i < n; i++)
+            for (j = n; j > 1; j /= 2)
+
+     */
+
     private static void BuscaBinaria()
     {
         var numeros = Enumerable.Range(1, 1024).ToArray();
         var numeroEscolhido = 38;
         var (quantidadeTentativas, numeroEncontrado) = EncontrarNumeroBuscaBinaria(numeros, numeroEscolhido);
 
+        Console.WriteLine("=========Busca Binária=========");
+
         Console.WriteLine($"Quantidade tentativas: {quantidadeTentativas}, " +
             $"\n Numero encontrado:{numeroEncontrado}" +
             $"\n Numero escolhido: {numeroEscolhido}");
+
+        Console.WriteLine("=========Busca Binária=========");
     }
 
     /// <summary>
@@ -43,7 +74,7 @@ public static class Program
             meio = (inicio + fim) / 2;
 
             var chute = numerosOrdernados[meio];
-            
+
             if (chute == numeroEscolhido)
                 return (quantidadeTentativas, meio);
 
